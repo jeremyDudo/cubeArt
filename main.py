@@ -85,6 +85,7 @@ def processedImage(image, final_size, show=False, save=True):
     return edge     
 
 
+#Note! Both image3D objects could be made more modular by allowing for more 
 def image3D_fromFunc(imageP, ax=0):
     """
     Take nxn image, return nxnxn array of the image 
@@ -119,4 +120,28 @@ def image3D_fromName(image, final_size, ax=0):
     return image3D
     
 
+def overlay(image3Ds):
+    """
+    Takes a list of >2 image3D matrices of same size, performs
+    logic to find the mutual "pixels" or "space" shared by the image3Ds
 
+
+    Input: array of image3D objects with SAME SIZE (this could be made more modular)
+
+    Output: array of positions of 'object' positions retained after carving out
+
+
+    Note: image3D objects can be understood as a matrix of 1's and 0's
+        1: there is 'object' here
+        0: there is not 'object' here
+    ** At the moment, I cannot verify if this exact mapping truly representative, but it gets the gist across **
+    """
+
+    exists = np.logical_and(matr_list[0], matr_list[1])
+    
+    for indx in range(len(image3Ds) - 1):
+        exists = np.logical_and(exists, matr_list[indx+1])
+    
+    exists = np.nonzero(exists)
+
+    return exists
