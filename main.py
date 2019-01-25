@@ -77,7 +77,7 @@ def processedImage(image, final_size, show=False, save=True):
         if not os.path.exists(imageFolder):
             os.makedirs(imageFolder)
         
-        with cd(imageFolder)
+        with cd(imageFolder):
             np.save(image + '{}'.format(final_size), edge)
 
     return edge       
