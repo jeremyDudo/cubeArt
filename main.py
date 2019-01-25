@@ -12,6 +12,24 @@ from skimage.segmentation import chan_vese
 from mpl_toolkits import mplot3d
 
 
+# File names [will be generated if saving]
+imageFolder = "Modified Images"
+
+
+# TO ALLOW EASY ACCESS TO SUBFOLDERS
+class cd:
+    """Context manager for changing the current working directory"""
+    def __init__(self, newPath):
+        self.newPath = os.path.expanduser(newPath)
+
+    def __enter__(self):
+        self.savedPath = os.getcwd()
+        os.chdir(self.newPath)
+
+    def __exit__(self, etype, value, traceback):
+        os.chdir(self.savedPath)
+
+
 def processedImage(image, final_size, show=False, save=True):
     """
     Converts image into silhouette with proper size for final cube
@@ -56,6 +74,10 @@ def processedImage(image, final_size, show=False, save=True):
         plt.show()        
 
     if save:
-        np.save(image + '{}'.format(final_size), edge)
+        if not os.path.exists(imageFolder):
+            os.makedirs(imageFolder)
+        
+        with cd(imageFolder)
+            np.save(image + '{}'.format(final_size), edge)
 
     return edge       
