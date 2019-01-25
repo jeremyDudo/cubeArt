@@ -137,10 +137,10 @@ def overlay(image3Ds):
     ** At the moment, I cannot verify if this exact mapping truly representative, but it gets the gist across **
     """
 
-    exists = np.logical_and(matr_list[0], matr_list[1])
+    exists = np.logical_and(image3Ds[0], image3Ds[1])
     
     for indx in range(len(image3Ds) - 1):
-        exists = np.logical_and(exists, matr_list[indx+1])
+        exists = np.logical_and(exists, image3Ds[indx+1])
     
     exists = np.nonzero(exists)
 
