@@ -77,7 +77,46 @@ def processedImage(image, final_size, show=False, save=True):
         if not os.path.exists(imageFolder):
             os.makedirs(imageFolder)
         
-        with cd(imageFolder):
-            np.save(image + '{}'.format(final_size), edge)
+        image = os.path.splitext(image)[0]
 
-    return edge       
+        with cd(imageFolder):
+            np.save(image + '_{}'.format(final_size), edge)
+
+    return edge     
+
+
+def image3D_fromFunc(imageP, ax=0):
+    """
+    Take nxn image, return nxnxn array of the image 
+    Retains only the image's original pixels while extended in the 3rd axis
+
+    Input: result from processedImage()
+            ax over which to rotate the image before matrix is made
+
+    Output: nxnxn array of image projected over 3rd axis
+    """
+    image3D = np.stack([image for _ in range( len(imageP[0]) )], axis=ax)
+
+    return image3D
+    
+
+def image3D_fromName(image, final_size, ax=0):
+    """
+    Take nxn image, return nxnxn array of the image 
+    Retains only the image's original pixels while extended in the 3rd axis
+
+    Input: Take the image name (same input as the processedImage func)
+            ax over which to rotate the image before matrix is made
+
+    Output: nxnxn array of image projected over 3rd axis
+    """
+    with cd(imageFolder):
+        image = image = os.path.splitext(image)[0]
+        image = np.load(image + '_{}'.format(final_size))
+    
+    image3D = np.stack([image for _ in range( len(image[0]) )], axis=ax)
+
+    return image3D
+    
+
+
