@@ -95,7 +95,7 @@ def image3D_fromFunc(imageP, ax=0):
 
     Output: nxnxn array of image projected over 3rd axis
     """
-    image3D = np.stack([image for _ in range( len(imageP[0]) )], axis=ax)
+    image3D = np.stack([imageP for _ in range( len(imageP[0]) )], axis=ax)
 
     return image3D
     
