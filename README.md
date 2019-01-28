@@ -11,7 +11,7 @@
 Be able to take 3+ images, project their silhouettes onto a cube-like shape and return a 3D object that contains all images' silhouette     data.
 
 ## Contributing
-Please take a look at the [contributing]() guidelines if you're interested in helping!
+Please take a look at the [contributing](https://github.com/jeremyDudo/cubeArt/blob/master/CONTRIBUTIONS.md) guidelines if you're interested in helping!
 <br>
 <br>
 #### Pending Features
